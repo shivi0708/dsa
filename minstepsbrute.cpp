@@ -24,7 +24,7 @@ int helper(int n, int *ans){
     ans[n]=output;
     return output;
 }
-
+//DP recursive
 int minsteps2(int n){
     int *ans = new int[n+1];
     // memset(ans,-1,n+1);
@@ -33,6 +33,33 @@ int minsteps2(int n){
     }
     return helper(n,ans);
 }
+
+//DP iterative
+int minsteps3(int n){
+    int *dp = new int[n+1];
+    dp[0]=0;
+    dp[1]=0;
+
+    for(int i=2;i<=n;i++){
+        int x=dp[i-1];
+        int y,z;
+        y=z=INT_MAX;
+
+        if(i%2==0){
+            y=dp[i/2];
+        }
+
+        if(i%3==0){
+            z=dp[i/3];
+        }
+        dp[i]=min(x,min(y,z))+1;
+    }
+    int output = dp[n];
+    delete []dp;
+    return output;
+}
+
+
 
 int minsteps(int n){
     if(n<=1){
@@ -60,4 +87,5 @@ int main(){
 
     cout<<minsteps(n)<<endl;
     cout<<minsteps2(n)<<endl;
+    cout<<minsteps3(n)<<endl;
 }
