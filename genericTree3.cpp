@@ -11,19 +11,24 @@ class TreeNode{
     }
 };
 
-void print(TreeNode<int>*root){
-    if(root == NULL){
-        return;
-    }
-    cout<<root->data<<": ";
-    for(int i=0;i<root->children.size();i++){
-        cout<<root->children[i]->data<<",";
-    }
-    cout<<endl;
+void printlevel(TreeNode<int>*root){
+  
+    queue<TreeNode<int>*>q1;
+    q1.push(root);
+    while(!q1.empty()){
+        TreeNode<int>* f = q1.front();
+        q1.pop();
+        cout<<f->data<<": ";
+        for(int i=0;i<f->children.size();i++){
+            cout<<f->children[i]->data<<", ";
+        }
+        cout<<endl;
 
-    for(int i=0;i<root->children.size();i++){
-        print(root->children[i]);
+        for(int i=0;i<f->children.size();i++){
+            q1.push(f->children[i]);
+        }
     }
+
 }
 
 
@@ -63,5 +68,5 @@ int main(){
 
     TreeNode<int> *root = takeinputlevel();
 
-    print(root);
+    printlevel(root);
 }
