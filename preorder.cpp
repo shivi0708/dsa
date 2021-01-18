@@ -58,31 +58,14 @@ TreeNode<int>* takeinputlevel(){
     return root;
 }
 
-int leafnodes(TreeNode<int>* root){
-    if(root == NULL){
-        return 0;
-    }
-    if(root->children.size()==0){
-        return 1;
-    }
-    int ans = 0;
-    for(int i=0;i<root->children.size();i++){
-        ans += leafnodes(root->children[i]);
-    }
 
-    return ans;
-}
-
-void leafnodes2(TreeNode<int>* root,int &ans){
-    if(root==NULL){
+void preorder(TreeNode<int>* root){
+    if(root == NULL ){
         return;
     }
-    if(root->children.size()==0){
-        ans++;
-        return;
-    }
+    cout<<root->data<<" ";
     for(int i=0;i<root->children.size();i++){
-        leafnodes2(root->children[i],ans);
+        preorder(root->children[i]);
     }
 }
 
@@ -91,8 +74,6 @@ int main(){
     TreeNode<int> *root = takeinputlevel();
 
     printlevel(root);
-    cout<<"leaf nodes are: "<<leafnodes(root)<<endl;
-    int nodes = 0;
-    leafnodes2(root,nodes);
-    cout<<"leaf nodes are using other way: "<<nodes<<endl;
-}
+    preorder(root);
+    
+    }
