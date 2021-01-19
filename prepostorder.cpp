@@ -69,11 +69,26 @@ void preorder(TreeNode<int>* root){
     }
 }
 
+
+void postorder(TreeNode<int>* root){
+     if(root == NULL ){
+        return;
+    }
+    for(int i=0;i<root->children.size();i++){
+        postorder(root->children[i]);
+    }
+        cout<<root->data<<" ";
+
+}
+
 int main(){
     
     TreeNode<int> *root = takeinputlevel();
 
     printlevel(root);
     preorder(root);
+    cout<<endl;
+    cout<<"postorder traversal: "<<endl;
+    postorder(root);
     
     }
