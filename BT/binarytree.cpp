@@ -20,6 +20,23 @@ class BTNode{
         }
 };
 
+BTNode<int>* takeinput(){
+    int rootdata;
+    cout<<"enter data:"<<endl;
+    cin>>rootdata;
+    if(rootdata == -1){
+        return NULL;
+    }
+
+    BTNode<int>*root = new BTNode<int>(rootdata);
+    BTNode<int>* leftchild = takeinput();
+    BTNode<int>* rightchild = takeinput();
+    root->left = leftchild;
+    root->right = rightchild;
+
+    return root;
+}
+
 void print(BTNode<int>* root){
     if(root==NULL){
         return;
@@ -38,11 +55,13 @@ void print(BTNode<int>* root){
 }
 
 int main(){
-    BTNode<int>*root = new BTNode<int>(1);
-    BTNode<int>*n1 = new BTNode<int>(2);
-    BTNode<int>*n2 = new BTNode<int>(3);
-    root->left=n1;
-    root->right=n2;
+    // BTNode<int>*root = new BTNode<int>(1);
+    // BTNode<int>*n1 = new BTNode<int>(2);
+    // BTNode<int>*n2 = new BTNode<int>(3);
+    // root->left=n1;
+    // root->right=n2;
+    BTNode<int>*root = takeinput();
+
     print(root);
     delete root;
 }
