@@ -91,11 +91,11 @@ vector<vector<int>> levelprint(BTNode<int>* root){
 }
 
 
-BTNode<int>* helper(vector<int>In,vector<int>Pre,int ins, int ine, int prs, int pre){
+BTNode<int>* helper(vector<int>In,vector<int>Post,int ins, int ine, int pos, int poe){
     if(ins>ine ){
         return NULL;
     }
-    int rootdata = Pre[prs];
+    int rootdata = Post[poe];
     int rootindex=-1;
     for(int i=ins;i<=ine;i++){
         if(In[i]==rootdata){
@@ -105,17 +105,17 @@ BTNode<int>* helper(vector<int>In,vector<int>Pre,int ins, int ine, int prs, int 
     }
     int leftins = ins;
     int leftine = rootindex-1;
-    int leftpres = prs+1;
-    int leftpree = leftpres+leftine-leftins;
+    int leftpos = pos;
+    int leftpoe = leftpos+leftine-leftins;
 
     int rightins = rootindex+1;
     int rightine = ine;
-    int rightprs = leftpree+1;
-    int rightpree = pre;
+    int rightpos = leftpoe+1;
+    int rightpoe = poe-1;
 
     BTNode<int>*root = new BTNode<int>(rootdata);
-    root->left = helper(In,Pre,leftins,leftine,leftpres,leftpree);
-    root->right = helper(In,Pre,rightins,rightine,rightprs,rightpree);
+    root->left = helper(In,Post,leftins,leftine,leftpos,leftpoe);
+    root->right = helper(In,Post,rightins,rightine,rightpos,rightpoe);
 
     return root;
 }
