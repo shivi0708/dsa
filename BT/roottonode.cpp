@@ -90,55 +90,20 @@ vector<vector<int>> levelprint(BTNode<int>* root){
     return v;
 }
 
-
-//O(N*Height)
-
-int height(BTNode<int>*root){
-    if(root == NULL) return 0;
-    return 1+max(height(root->left),height(root->right));
-
-}
-
-int diameter(BTNode<int>* root){
-    if(root == NULL) return 0;
-
-    int ans1 = height(root->left) + height(root->right);
-    int ans2 = diameter(root->left);
-    int ans3 = diameter(root->right);
-
-    return max(ans1, max(ans2, ans3));
-}
-
-pair<int,int> height1(BTNode<int>*root){
-    if(root == NULL){
-        pair<int,int>p;
-        p.first=0;
-        p.second=0;
-        return p;
+bool getpath(BTNode<int>*root, int val,vector<int>&v){
+    if(root == NULL) return false;
+    v.push_back(root->data);
+    if(root->data == val){
+        return true;
     }
-    pair<int,int>leftans = height1(root->left);
-    pair<int,int>rightans = height1(root->right);
+    bool leftf = getpath(root->left,val,v);
+    bool rightf = getpath(root->right,val,v);
 
-    int lh = leftans.first;
-    int ld = leftans.second;
-
-    int rh=rightans.first;
-    int rd=rightans.second;
-
-    int height = 1+max(lh,rh);
-    int diameter = max(lh+rh,max(ld,rd));
-    pair<int,int>p;
-    p.first = height;
-    p.second = diameter;
-
-    return p;
-}
-
-
-//O(N)
-int diameterother(BTNode<int>*root){
-    pair<int,int>p = height1(root);
-    return p.second;
+    if(leftf||rightf){
+        return true;
+    }
+    v.pop_back();
+    return false;
 }
 
 int main(){
@@ -151,9 +116,20 @@ int main(){
         }
         cout<<endl;
     }
+    int val;
+    cout<<"enter node value"<<endl;
+    cin>>val;
 
-    cout<<"Diameter of the tree is: "<<diameter(root)<<endl;
-    cout<<"Other way diameter: "<<diameterother(root)<<endl;
+    vector<int>ans;
+    if(getpath(root,val,ans)){
+        for(int i=0;i<ans.size();i++){
+            cout<<ans[i]<<" ";
+        }
+        cout<<endl;
+    }
+    else{
+        cout<<"no path"<<endl;
+    }
  }
 
 
