@@ -102,6 +102,25 @@ BTNode<int>* search(BTNode<int>*root, int val){
        return search(root->left,val);
     
     }
+
+//iterative
+BTNode<int>* searchother(BTNode<int>*root, int val){
+   while(root!=NULL){
+
+       if(root->data == val)
+       return root;
+    else if(val>root->data){
+        root = root->right;
+    }
+    
+    else{
+        root = root->left;
+    }
+    
+    }
+
+    return NULL;
+}
 int main(){
     BTNode<int>*root = inputlevel();
 
