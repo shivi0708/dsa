@@ -90,37 +90,29 @@ vector<vector<int>> levelprint(BTNode<int>* root){
     return v;
 }
 
-BTNode<int>* search(BTNode<int>*root, int val){
-    if(root == NULL) return NULL;
-
-    if(root->data == val) return root;
-
-    if(val>root->data){
-        return search(root->right,val);
+int minval(BTNode<int>*root){
+    if(root==NULL){
+        return -1;
     }
-    
-       return search(root->left,val);
-    
+    BTNode<int>*temp = root;
+    while(temp->left!=NULL){
+        temp=temp->left;
     }
-
-//iterative
-BTNode<int>* searchother(BTNode<int>*root, int val){
-   while(root!=NULL){
-
-       if(root->data == val)
-       return root;
-    else if(val>root->data){
-        root = root->right;
-    }
-    
-    else{
-        root = root->left;
-    }
-    
-    }
-
-    return NULL;
+    return temp->data;
 }
+
+int maxval(BTNode<int>*root){
+    if(root==NULL){
+        return -1;
+    }
+    BTNode<int>*temp = root;
+
+    while(temp->right!=NULL){
+        temp=temp->right;
+    }
+    return temp->data;
+}
+
 int main(){
     BTNode<int>*root = inputlevel();
 
@@ -131,17 +123,9 @@ int main(){
         }
         cout<<endl;
     }
-    int val;
-    cout<<"enter value to find "<<endl;
-    cin>>val;
-    BTNode<int>*r1 = searchother(root,val);
-    vector<vector<int>> a = levelprint(r1);
-    for(int i=0;i<a.size();i++){
-        for(int j=0;j<a[i].size();j++){
-            cout<<a[i][j]<<" ";
-        }
-        cout<<endl;
-    }
+    cout<<"Min value is: "<<minval(root)<<endl;
+    cout<<"Max value is: "<<maxval(root)<<endl;
+   
   }
 
 
