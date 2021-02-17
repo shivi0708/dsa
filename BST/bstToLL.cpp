@@ -43,6 +43,7 @@ class BST{
         print(root->right);
     }
 
+    //T = O(height)
     bool hasdata(BTNode<int>*node, int data){
         if(node == NULL) return false;
 
@@ -57,6 +58,7 @@ class BST{
         }
     }
 
+    //T = O(height)
     BTNode<int>* insert(BTNode<int>*node, int data){
         if(node == NULL){
             BTNode<int>* n = new BTNode<int>(data);
@@ -71,6 +73,7 @@ class BST{
         return node;
     }
 
+    //T = O(2h) = O(h)
     BTNode<int>* deleteData(BTNode<int>* node, int data){
         if(node == NULL) return NULL;
 
@@ -200,4 +203,6 @@ int main(){
         cout<<temp->data<<" ";
         temp = temp->right;
     }
+
+    cout<<endl;
 }
