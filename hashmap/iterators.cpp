@@ -15,6 +15,11 @@ int main(){
     }
     cout<<endl;
 
+    for(auto it=mymap.begin();it!=mymap.end();it++){
+        cout<<it->first<<"->";
+    }
+    cout<<endl;
+
     map<string, int>mymap1;
     mymap1["abc"] = 1;
     mymap1["def"] = 2;
