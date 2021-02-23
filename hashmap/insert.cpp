@@ -59,7 +59,15 @@ class mymap{
     }
     
     V getvalue(string key){
-
+        int bucketindex = getbucketindex(key);
+        Mapnode<V>* head = buckets[bucketindex];
+        while(head!=NULL){
+            if(head->key == key){
+                return head->value;
+            }
+            head = head->next;
+        }
+        return 0;
     }
 
     void insert(string key, V value){
@@ -79,6 +87,27 @@ class mymap{
     }
 
     V remove(string key){
-
+        int bucketindex = getbucketindex(key);
+        Mapnode<V>*head = buckets[bucketindex];
+        Mapnode<V>* prev = NULL;
+        while (head!=NULL)
+        {
+            if(head->key == key){
+                if(prev == NULL){
+                    buckets[bucketindex] = head->next;
+                }
+            else{
+                    prev->next = head->next;
+            }
+            V value = head->value;
+            head->next = NULL;
+            delete head;
+            count--;
+            return value;
+        }
+            prev = head
+            head=head->next;
+        }
+        return 0;
     }
 };
