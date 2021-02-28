@@ -14,13 +14,17 @@ for(int i=0;i<n;i++){
 
 void dfs(vector<vector<int>>matrix){
     int n = matrix.size();
+    int count =0;
     vector<bool>visited(n,false);
     for(int i=0;i<n;i++){
         if(!visited[i]){
+            count++;
     print(matrix,i,visited);
 }
 }
+cout<<"No of connected componens: "<<count<<endl;
 }
+
 
 
 int main(){
