@@ -22,7 +22,7 @@ void dfs(vector<vector<int>>matrix){
     print(matrix,i,visited);
 }
 }
-cout<<"No of connected componens: "<<count<<endl;
+cout<<"No of connected components: "<<count<<endl;
 }
 
 
